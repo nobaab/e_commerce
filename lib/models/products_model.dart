@@ -154,7 +154,7 @@ class Results {
       });
     }
     slug = json['slug'];
-    productName = json['product_name'];
+    productName = json['product_name'] ?? "";
     model = json['model'];
     commissionType = json['commission_type'];
     amount = json['amount'];

@@ -27,10 +27,8 @@ class ProductPage extends StatelessWidget {
                 child: CircularProgressIndicator(),
               );
             } else if (state is DataLoadedState) {
-              DataInfoModel? dataList = state.products.dataList;
-              int? len = dataList!.products!.results!.length;
-              //print(dataList.length);
-              print(len);
+              List<Result> productList = state.products.data.products.results;
+              print(productList.length);
               return Column(
                 children: [
                   Row(
@@ -77,126 +75,122 @@ class ProductPage extends StatelessWidget {
                           crossAxisSpacing: 10,
                           mainAxisExtent: 267,
                         ),
-                        itemCount: len,
+                        itemCount: productList.length,
                         itemBuilder: (context, index) {
-                          return InkWell(
-                            onTap: () {},
-                            child: SizedBox(
-                              child: Card(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                ),
-                                elevation: 0,
-                                color: whiteBack,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                        "assets/images/potato_chips.png"),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    Text(
-                                      dataList.products!.results![index]
-                                          .productName!,
+                          return SizedBox(
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              elevation: 0,
+                              color: whiteBack,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Flexible(
+                                    child: Text(
+                                      productList[index].productName,
                                       style: const TextStyle(
                                           color: naturalBlack,
                                           fontSize: 14,
                                           fontWeight: FontWeight.w500),
                                     ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: [
-                                        Row(
-                                          children: const [
-                                            Text(
-                                              "ক্রয়",
-                                              style: TextStyle(
-                                                  color: naturalBlack300,
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w400),
-                                            ),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            Text(
-                                              "৳ 20.00",
-                                              style: TextStyle(
-                                                  color: secondaryColor,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w700),
-                                            ),
-                                          ],
-                                        ),
-                                        Row(
-                                          children: const [
-                                            Text(
-                                              "৳ 22.00",
-                                              style: TextStyle(
-                                                  color: secondaryColor,
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w400),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          children: const [
-                                            Text(
-                                              "বিক্রয়",
-                                              style: TextStyle(
-                                                  color: naturalBlack300,
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w400),
-                                            ),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            Text(
-                                              "৳ 20.00",
-                                              style: TextStyle(
-                                                  color: naturalBlack300,
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w700),
-                                            ),
-                                          ],
-                                        ),
-                                        Row(
-                                          children: const [
-                                            Text(
-                                              "লাভ",
-                                              style: TextStyle(
-                                                  color: naturalBlack300,
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w400),
-                                            ),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            Text(
-                                              "৳ 5.00",
-                                              style: TextStyle(
-                                                  color: naturalBlack300,
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w700),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          const Text(
+                                            "ক্রয়",
+                                            style: TextStyle(
+                                                color: naturalBlack300,
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w400),
+                                          ),
+                                          const SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text(
+                                            "৳ ${productList[index].amount}",
+                                            style: const TextStyle(
+                                                color: secondaryColor,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w700),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: const [
+                                          Text(
+                                            "৳ 22.00",
+                                            style: TextStyle(
+                                                color: secondaryColor,
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w400),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        children: const [
+                                          Text(
+                                            "বিক্রয়",
+                                            style: TextStyle(
+                                                color: naturalBlack300,
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w400),
+                                          ),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text(
+                                            "৳ 20.00",
+                                            style: TextStyle(
+                                                color: naturalBlack300,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w700),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: const [
+                                          Text(
+                                            "লাভ",
+                                            style: TextStyle(
+                                                color: naturalBlack300,
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w400),
+                                          ),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text(
+                                            "৳ 5.00",
+                                            style: TextStyle(
+                                                color: naturalBlack300,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w700),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
                             ),
                           );

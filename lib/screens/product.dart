@@ -27,9 +27,10 @@ class ProductPage extends StatelessWidget {
                 child: CircularProgressIndicator(),
               );
             } else if (state is DataLoadedState) {
-              List<ProductModel> productList = state.products;
-              print(productList.length);
-              // print(productList[0].data!.products!.results![0].productName!);
+              DataInfoModel? dataList = state.products.dataList;
+              int? len = dataList!.products!.results!.length;
+              //print(dataList.length);
+              print(len);
               return Column(
                 children: [
                   Row(
@@ -76,7 +77,7 @@ class ProductPage extends StatelessWidget {
                           crossAxisSpacing: 10,
                           mainAxisExtent: 267,
                         ),
-                        itemCount: productList.length,
+                        itemCount: len,
                         itemBuilder: (context, index) {
                           return InkWell(
                             onTap: () {},
@@ -96,10 +97,7 @@ class ProductPage extends StatelessWidget {
                                       height: 10,
                                     ),
                                     Text(
-                                      productList[index]
-                                          .data!
-                                          .products!
-                                          .results![index]
+                                      dataList.products!.results![index]
                                           .productName!,
                                       style: const TextStyle(
                                           color: naturalBlack,

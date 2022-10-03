@@ -17,7 +17,7 @@ class DataLoadingState extends ProductsState {
 }
 
 class DataLoadedState extends ProductsState {
-  final List<ProductModel> products;
+  final ProductModel products;
   const DataLoadedState(
     this.products,
   );
